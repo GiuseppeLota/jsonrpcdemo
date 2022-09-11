@@ -1,4 +1,4 @@
-package com.example.demo.operations;
+package com.martinbohm.demo.operations;
 
 import com.googlecode.jsonrpc4j.JsonRpcService;
 

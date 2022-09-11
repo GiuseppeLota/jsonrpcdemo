@@ -1,8 +1,8 @@
-package com.example.demo.operations.impl;
+package com.martinbohm.demo.operations.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.operations.UserService;
+import com.martinbohm.demo.operations.UserService;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 
 @Service
