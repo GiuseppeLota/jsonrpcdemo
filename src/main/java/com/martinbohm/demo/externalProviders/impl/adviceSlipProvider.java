@@ -18,7 +18,7 @@ import com.martinbohm.demo.externalProviders.AdviceProvider;
 public class adviceSlipProvider implements AdviceProvider {
 
     public AdviceResponse findAll() {
-        AdviceResponse result = WebClient.builder()
+        return WebClient.builder()
                 .baseUrl("https://api.adviceslip.com")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchangeStrategies(ExchangeStrategies.builder().codecs(this::acceptedCodecs).build())
@@ -29,8 +29,7 @@ public class adviceSlipProvider implements AdviceProvider {
                 .retrieve()
                 .toEntity(AdviceResponse.class)
                 .block()
-                .getBody();
-        return null;        
+                .getBody(); 
     }
 
     private void acceptedCodecs(ClientCodecConfigurer clientCodecConfigurer) {
