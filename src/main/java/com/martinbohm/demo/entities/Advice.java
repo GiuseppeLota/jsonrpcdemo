@@ -1,8 +1,9 @@
 package com.martinbohm.demo.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Advice {
+public class Advice implements Serializable{
 
     public Advice(List<String> advices){
         setAdviceList(advices);

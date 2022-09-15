@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.martinbohm.demo.config.Constants;
 import com.martinbohm.demo.dto.AdviceResponse;
 import com.martinbohm.demo.entities.Advice;
 import com.martinbohm.demo.entities.AdviceRequest;
@@ -21,6 +23,7 @@ public class AdviceServiceImpl implements AdviceService {
     private AdviceProvider adviceProvider;
 
     @Override
+    @Cacheable(value = Constants.CACHE_NAME, key = "#request.topic.concat(#request.amount)")
     public Advice giveMeAdvice(AdviceRequest request) {
 
         AdviceResponse result = adviceProvider.findAll();
@@ -31,7 +34,7 @@ public class AdviceServiceImpl implements AdviceService {
                 .map(adv -> adv.getAdvice())
                 .collect(Collectors.toList());
 
-        return new Advice(advices);        
+        return new Advice(advices);
     }
 
     @Override

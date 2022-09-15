@@ -1,5 +1,6 @@
-package com.martinbohm.demo;
+package com.martinbohm.demo.config;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -13,9 +14,25 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImplExporter;
+import com.hazelcast.config.Config;
+import com.hazelcast.config.MapConfig;
 
 @Configuration
+@EnableCaching
 public class ApplicationConfig {
+
+    private final int CACHE_TTL_SECONDS = 300;
+
+    @Bean
+    Config config() {
+        Config config = new Config();
+
+        MapConfig mapConfig = new MapConfig();
+        mapConfig.setTimeToLiveSeconds(CACHE_TTL_SECONDS);
+        config.getMapConfigs().put(Constants.CACHE_NAME, mapConfig);
+
+        return config;
+    }
 
     @Bean
     public static AutoJsonRpcServiceImplExporter autoJsonRpcServiceImplExporter() {
