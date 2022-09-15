@@ -1,5 +1,6 @@
 package com.martinbohm.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,17 +12,23 @@ import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImplExporter;
 import com.hazelcast.config.Config;
 import com.hazelcast.config.MapConfig;
+import com.martinbohm.demo.interceptors.ResponseInterceptor;
 
 @Configuration
 @EnableCaching
-public class ApplicationConfig {
+public class ApplicationConfig implements WebMvcConfigurer {
 
     private final int CACHE_TTL_SECONDS = 300;
+
+    @Autowired
+    private ResponseInterceptor responseInterceptor;
 
     @Bean
     Config config() {
@@ -57,5 +64,10 @@ public class ApplicationConfig {
                 .registerWithDefaultConfig(new Jackson2JsonDecoder(new ObjectMapper(), MimeTypeUtils.TEXT_HTML));
         clientCodecConfigurer.customCodecs()
                 .registerWithDefaultConfig(new Jackson2JsonEncoder(new ObjectMapper(), MimeTypeUtils.TEXT_HTML));
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(responseInterceptor);
     }
 }
