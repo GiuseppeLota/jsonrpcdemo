@@ -1,17 +1,13 @@
 # Getting Started
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## Requirements
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.3/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.7.3/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.7.3/reference/htmlsingle/#web)
+To run the project is required the JDK 1.8.
 
-### Guides
-The following guides illustrate how to use some features concretely:
+### Project launch
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+Here the following steps:
+
+1. ./mvnw install
+2. java -jar .\target\jsonrpcdemo-0.0.1-SNAPSHOT.war
 
