@@ -4,6 +4,6 @@ import com.martinbohm.demo.dto.AdviceResponse;
 
 public interface AdviceProvider {
 
-    AdviceResponse findAll(); 
+    AdviceResponse listAdvices(String topic); 
 }
 

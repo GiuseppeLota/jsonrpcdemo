@@ -3,11 +3,7 @@ package com.martinbohm.demo.entities;
 import java.io.Serializable;
 import java.util.List;
 
-public class Advice implements Serializable{
-
-    public Advice(List<String> advices){
-        setAdviceList(advices);
-    }
+public class Advice implements Serializable {
 
     private List<String> adviceList;
 
@@ -17,5 +13,5 @@ public class Advice implements Serializable{
 
     public void setAdviceList(List<String> adviceList) {
         this.adviceList = adviceList;
-    }    
+    }
 }

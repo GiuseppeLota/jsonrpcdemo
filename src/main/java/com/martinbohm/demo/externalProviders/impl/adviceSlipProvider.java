@@ -1,6 +1,7 @@
 package com.martinbohm.demo.externalProviders.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,10 +15,15 @@ public class adviceSlipProvider implements AdviceProvider {
     @Autowired
     WebClient webClient;
 
-    public AdviceResponse findAll() {
+    @Value("${advice.slip.searchPath}")
+    private String searchPath;
+
+    public AdviceResponse listAdvices(String topic) {
+        String searchUri = String.format("%s/%s", searchPath, topic);
+
         return webClient
                 .get()
-                .uri("/advice/search/spiders")
+                .uri(searchUri)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .toEntity(AdviceResponse.class)

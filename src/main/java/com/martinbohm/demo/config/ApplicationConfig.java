@@ -1,5 +1,6 @@
 package com.martinbohm.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,9 @@ import com.hazelcast.config.MapConfig;
 public class ApplicationConfig {
 
     private final int CACHE_TTL_SECONDS = 300;
+
+    @Value( "${advice.slip.baseUrl}") 
+    private String BaseUrl;
 
     @Bean
     Config config() {
@@ -46,7 +50,7 @@ public class ApplicationConfig {
     @Bean
     public WebClient getWebClient() {
         return WebClient.builder()
-                .baseUrl("https://api.adviceslip.com")
+                .baseUrl(BaseUrl)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchangeStrategies(ExchangeStrategies.builder().codecs(this::acceptedCodecs).build())
                 .build();
