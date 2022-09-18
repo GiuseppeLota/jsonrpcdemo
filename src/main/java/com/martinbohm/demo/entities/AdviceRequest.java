@@ -1,6 +1,8 @@
 package com.martinbohm.demo.entities;
 
-public class AdviceRequest {
+import java.io.Serializable;
+
+public class AdviceRequest implements Serializable {
 
     private String topic;
     private Integer amount;
