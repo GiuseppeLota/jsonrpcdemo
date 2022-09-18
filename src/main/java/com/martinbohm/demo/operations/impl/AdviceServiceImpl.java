@@ -1,5 +1,6 @@
 package com.martinbohm.demo.operations.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -7,8 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
 import com.martinbohm.demo.config.Constants;
 import com.martinbohm.demo.dto.AdviceResponse;
 import com.martinbohm.demo.entities.Advice;
@@ -32,11 +31,21 @@ public class AdviceServiceImpl implements AdviceService {
             throw new IllegalArgumentException("Topic should not be empty or blank");
         }
 
-        if(!Objects.isNull(request.getAmount()) && !(request.getAmount() > 0)){
+        if (!Objects.isNull(request.getAmount()) && !(request.getAmount() > 0)) {
             throw new IllegalArgumentException("Amount should be more than 0");
         }
 
         AdviceResponse result = adviceProvider.listAdvices(request.getTopic());
+
+        Advice adviceResponse = new Advice();
+
+        if (!Objects.isNull(result.getMessage())) {
+            adviceResponse.setErrorType(result.getMessage().getType());
+            adviceResponse.setErrorMessage(result.getMessage().getText());
+            adviceResponse.setAdviceList(new ArrayList<String>());
+            return adviceResponse;
+        }
+
         int limit = LimitFor(request.getAmount(), result.getSlips().size());
 
         List<String> advices = result
@@ -46,7 +55,6 @@ public class AdviceServiceImpl implements AdviceService {
                 .limit(limit)
                 .collect(Collectors.toList());
 
-        Advice adviceResponse = new Advice();
         adviceResponse.setAdviceList(advices);
 
         return adviceResponse;

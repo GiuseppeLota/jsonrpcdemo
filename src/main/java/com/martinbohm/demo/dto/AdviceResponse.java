@@ -5,7 +5,10 @@ import java.util.List;
 
 public class AdviceResponse implements Serializable {
 
+    private List<Advice> slips;
     private int total_results;
+    private String query;
+    private Message message;
 
     public int getTotal_results() {
         return total_results;
@@ -15,8 +18,6 @@ public class AdviceResponse implements Serializable {
         this.total_results = total_results;
     }
 
-    private String query;
-
     public String getQuery() {
         return query;
     }
@@ -25,8 +26,6 @@ public class AdviceResponse implements Serializable {
         this.query = query;
     }
 
-    private List<Advice> slips;
-
     public List<Advice> getSlips() {
         return slips;
     }
@@ -34,4 +33,13 @@ public class AdviceResponse implements Serializable {
     public void setSlips(List<Advice> slips) {
         this.slips = slips;
     }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+
 }
