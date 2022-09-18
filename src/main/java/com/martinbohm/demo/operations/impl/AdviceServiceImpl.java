@@ -27,7 +27,7 @@ public class AdviceServiceImpl implements AdviceService {
     @Cacheable(value = Constants.CACHE_NAME)
     public AdviceResponse giveMeAdvice(AdviceRequest request) {
 
-        if (request.getTopic().isBlank() || request.getTopic().isEmpty()) {
+        if (Objects.isNull(request.getTopic()) || request.getTopic().isBlank() || request.getTopic().isEmpty()) {
             throw new IllegalArgumentException("Topic should not be empty or blank");
         }
 
