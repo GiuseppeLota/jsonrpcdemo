@@ -1,9 +1,9 @@
 package com.martinbohm.demo.externalProviders;
 
-import com.martinbohm.demo.dto.AdviceResponse;
+import com.martinbohm.demo.dto.AdviceResult;
 
 public interface AdviceProvider {
 
-    AdviceResponse listAdvices(String topic); 
+    AdviceResult listAdvices(String topic); 
 }
 

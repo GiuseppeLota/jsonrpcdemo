@@ -3,7 +3,7 @@ package com.martinbohm.demo.entities;
 import java.io.Serializable;
 import java.util.List;
 
-public class Advice implements Serializable {
+public class AdviceResponse implements Serializable {
 
     private List<String> adviceList;
 

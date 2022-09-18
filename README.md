@@ -11,3 +11,6 @@ Here the following cli to run in the root of the project:
 1. ```./mvnw install```
 2. ```java -jar .\target\jsonrpcdemo-0.0.1-SNAPSHOT.war```
 
+### Unit tests
+
+``` .mvnw test ```

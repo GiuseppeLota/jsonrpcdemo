@@ -3,7 +3,7 @@ package com.martinbohm.demo.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class AdviceResponse implements Serializable {
+public class AdviceResult implements Serializable {
 
     private List<Advice> slips;
     private int total_results;

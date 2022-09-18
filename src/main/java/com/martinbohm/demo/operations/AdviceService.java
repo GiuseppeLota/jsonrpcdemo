@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.googlecode.jsonrpc4j.JsonRpcMethod;
 import com.googlecode.jsonrpc4j.JsonRpcService;
-import com.martinbohm.demo.entities.Advice;
+import com.martinbohm.demo.entities.AdviceResponse;
 import com.martinbohm.demo.entities.AdviceRequest;
 
 @Service
@@ -12,7 +12,7 @@ import com.martinbohm.demo.entities.AdviceRequest;
 public interface AdviceService {
 
     @JsonRpcMethod("GiveMeAdvice")
-    public Advice giveMeAdvice(AdviceRequest request);
+    public AdviceResponse giveMeAdvice(AdviceRequest request);
 
     @JsonRpcMethod("test")
     public String get();

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.martinbohm.demo.config.Constants;
-import com.martinbohm.demo.dto.AdviceResponse;
-import com.martinbohm.demo.entities.Advice;
+import com.martinbohm.demo.dto.AdviceResult;
+import com.martinbohm.demo.entities.AdviceResponse;
 import com.martinbohm.demo.entities.AdviceRequest;
 import com.martinbohm.demo.externalProviders.AdviceProvider;
 import com.martinbohm.demo.operations.AdviceService;
@@ -25,7 +25,7 @@ public class AdviceServiceImpl implements AdviceService {
 
     @Override
     @Cacheable(value = Constants.CACHE_NAME)
-    public Advice giveMeAdvice(AdviceRequest request) {
+    public AdviceResponse giveMeAdvice(AdviceRequest request) {
 
         if (request.getTopic().isBlank() || request.getTopic().isEmpty()) {
             throw new IllegalArgumentException("Topic should not be empty or blank");
@@ -35,9 +35,9 @@ public class AdviceServiceImpl implements AdviceService {
             throw new IllegalArgumentException("Amount should be more than 0");
         }
 
-        AdviceResponse result = adviceProvider.listAdvices(request.getTopic());
+        AdviceResult result = adviceProvider.listAdvices(request.getTopic());
 
-        Advice adviceResponse = new Advice();
+        AdviceResponse adviceResponse = new AdviceResponse();
 
         if (!Objects.isNull(result.getMessage())) {
             adviceResponse.setErrorType(result.getMessage().getType());

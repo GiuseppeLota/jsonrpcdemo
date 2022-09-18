@@ -6,6 +6,16 @@ public class Advice {
 
     private int id;
 
+    public Advice(){
+
+    }
+
+    public Advice(int id, String advice, Date date){
+        this.id = id;
+        this.advice = advice;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }
